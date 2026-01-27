@@ -1,0 +1,115 @@
+---
+layout: single
+title: "StepFlow: Dual Supervision and Step-Aware Architecture for One-Step Flow Matching Speech Synthesis"
+permalink: /
+author_profile: false
+header:
+  overlay_color: "#000"
+  overlay_filter: "0.5"
+---
+
+<div style="text-align: justify; margin-bottom: 40px;">
+    <h2>Abstract</h2>
+    <p>
+        Flow-matching models have enabled high-quality text-to-speech synthesis, but their iterative sampling process incurs substantial computational cost[cite: 59]. We introduce <strong>StepFlow</strong>, a modular distillation framework for one-step synthesis[cite: 62]. StepFlow addresses <strong>process variance</strong> caused by endpoint error accumulation and <strong>structural parameter inefficiency</strong> when reusing continuous-time architectures[cite: 60, 61]. By combining <strong>Dual Supervision</strong> with <strong>Step-Aware Architecture</strong>, StepFlow achieves near-teacher quality in a single inference step while reducing model parameters by 24%[cite: 64, 65, 66].
+    </p>
+</div>
+
+<hr>
+
+<div style="margin-bottom: 40px;">
+    <h2>Proposed Methodology</h2>
+    <div style="text-align: center; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <img src="assets/images/architecture.svg" alt="StepFlow Architecture" style="width: 100%; height: auto; max-width: 1000px;">
+        
+        <p style="text-align: justify; font-size: 0.9em; color: #333; margin-top: 20px; line-height: 1.6;">
+            <strong>Figure 1. Overview of the StepFlow framework.</strong> 
+            The framework transitions from a heavy MLP-based modulation network to a <strong>Step-Aware Architecture</strong>[cite: 274]. By utilizing <strong>Step-Aware Tokens</strong>, we align model capacity with the finite information entropy of the discrete task, reducing structural over-parameterization[cite: 81, 392]. On the right, our <strong>Dual Supervision</strong> strategy synergizes endpoint matching with deterministic mean velocity alignment, guiding the student along the teacher's mean trajectory and reducing training variance by 60%[cite: 275, 312].
+        </p>
+    </div>
+</div>
+
+<hr>
+
+<div style="margin-bottom: 40px;">
+    <h2>Audio Demos</h2>
+    <p>Samples are generated in a zero-shot manner using the model trained on the 95K-hour Emilia dataset[cite: 516, 517].</p>
+    
+    <h3>1. Quality Comparison (NFE=1 vs. NFE=10)</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f8f9fa;">
+                <th style="padding: 12px; border: 1px solid #dee2e6;">Model</th>
+                <th style="padding: 12px; border: 1px solid #dee2e6;">Steps</th>
+                <th style="padding: 12px; border: 1px solid #dee2e6;">Sample 1 (English)</th>
+                <th style="padding: 12px; border: 1px solid #dee2e6;">Sample 2 (Mandarin)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 12px; border: 1px solid #dee2e6;">Teacher (StepTTS) [cite: 595]</td>
+                <td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">10</td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><audio controls style="width: 180px;"><source src="audio/t_en_1.wav"></audio></td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><audio controls style="width: 180px;"><source src="audio/t_zh_1.wav"></audio></td>
+            </tr>
+            <tr style="background-color: #e7f3ff;">
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><strong>StepFlow (Ours)</strong> [cite: 66]</td>
+                <td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;"><strong>1</strong></td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><audio controls style="width: 180px;"><source src="audio/s_en_1.wav"></audio></td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><audio controls style="width: 180px;"><source src="audio/s_zh_1.wav"></audio></td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; border: 1px solid #dee2e6;">Naive Endpoint [cite: 597]</td>
+                <td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">1</td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><audio controls style="width: 180px;"><source src="audio/b_en_1.wav"></audio></td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;"><audio controls style="width: 180px;"><source src="audio/b_zh_1.wav"></audio></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<div style="margin-bottom: 40px;">
+    <h2>Main Results</h2>
+    <p>StepFlow outperforms existing distillation baselines while significantly improving inference efficiency[cite: 619, 620].</p>
+    <table style="width: 100%; text-align: center;">
+        <tr style="background-color: #f8f9fa;">
+            <th>Method</th>
+            <th>Steps</th>
+            <th>Params</th>
+            <th>MOS-N ↑</th>
+            <th>SIM-O ↑</th>
+            <th>RTF ↓</th>
+        </tr>
+        <tr>
+            <td>Teacher [cite: 634]</td>
+            <td>10</td>
+            <td>154M</td>
+            <td>4.43 ± 0.06</td>
+            <td>0.66</td>
+            <td>0.303</td>
+        </tr>
+        <tr style="font-weight: bold; color: #0056b3;">
+            <td>StepFlow (Ours) [cite: 634]</td>
+            <td>1</td>
+            <td>118M</td>
+            <td>4.32 ± 0.06</td>
+            <td>0.66</td>
+            <td>0.012</td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+
+<div style="background-color: #f1f1f1; padding: 20px; border-radius: 5px;">
+    <h3>Citation</h3>
+    <pre style="white-space: pre-wrap; font-size: 0.85em;">
+@article{stepflow2026,
+  title={StepFlow: Dual Supervision and Step-Aware Architecture for One-Step Flow Matching Speech Synthesis},
+  author={Anonymous Authors},
+  journal={Preliminary work. Under review by ICML},
+  year={2026}
+}</pre>
+</div>
