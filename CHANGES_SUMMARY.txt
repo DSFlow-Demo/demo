@@ -1,0 +1,95 @@
+=================================================================
+StepFlow Demo Page - 修改总结 / Modification Summary
+=================================================================
+
+修改日期 / Date: 2026-01-30
+
+## 主要变更 / Main Changes
+
+### 1. ✅ 删除 Multilingual Demos 部分 (Section 3)
+   - 移除了英语、中文、日语、韩语的多语言零样本合成演示
+   - 删除了 8 个音频文件：
+     * ref_en.wav, ref_ja.wav, ref_ko.wav, ref_zh.wav
+     * stepflow_multi_en.wav, stepflow_multi_ja.wav, 
+       stepflow_multi_ko.wav, stepflow_multi_zh.wav
+
+### 2. ✅ 新增 CFG Strength Ablation 部分 (New Section 3)
+   - 基于论文 Table 5 (C.2. CFG Strength Ablation)
+   - 展示分类器自由引导 (CFG) 强度对合成质量的影响
+   - 包含 5 个 CFG 强度级别：w=0.00, 0.05, 0.10, 0.20, 0.50
+   - 创建了 10 个新音频文件：
+     * cfg_w0.00_en.wav, cfg_w0.00_zh.wav
+     * cfg_w0.05_en.wav, cfg_w0.05_zh.wav (最优配置)
+     * cfg_w0.10_en.wav, cfg_w0.10_zh.wav
+     * cfg_w0.20_en.wav, cfg_w0.20_zh.wav
+     * cfg_w0.50_en.wav, cfg_w0.50_zh.wav
+   
+   关键发现：
+   - 学生模型在 w=0.05 时达到最优性能 (MOS-N 4.32, SIM-o 66%)
+   - 远低于教师模型的 w=0.7
+   - 原因：蒸馏过程内化了教师的引导效应
+
+### 3. ✅ 删除 Citation 部分
+   - 移除了 BibTeX 引用代码块
+   - 保留了页脚的基本信息
+
+### 4. ✅ 更新章节编号
+   - Section 3: CFG Strength Ablation (新增)
+   - Section 4: Emotion & Prosody Control (原 Section 4)
+   - Section 5: Ablation Study (原 Section 5)
+
+## 文件统计 / File Statistics
+
+### 音频文件 / Audio Files:
+- 修改前: 49 个文件
+- 修改后: 41 个文件
+- 删除: 8 个多语言文件
+- 新增: 10 个 CFG 消融文件
+- 净变化: +2 个文件
+
+### HTML 结构 / HTML Structure:
+- 总行数: ~648 行 (删除 Citation 后)
+- 新增内容: CFG Ablation 表格 (~60 行)
+- 删除内容: Multilingual 网格 (~35 行) + Citation (~15 行)
+
+## 技术细节 / Technical Details
+
+### CFG Ablation 表格特性:
+1. 表格列: CFG Strength, Description, English Sample, Mandarin Sample, MOS-N, SIM-o
+2. 最优行高亮 (w=0.05) 使用 stepflow-row 样式类
+3. 包含解释性注释说明反向 CFG 曲线现象
+4. 数据来源: 论文 Table 5 (第 15 页)
+
+### 样式保持:
+- 使用现有的 CSS 类和布局
+- 保持与其他章节一致的视觉风格
+- 响应式设计兼容移动端
+
+## 待办事项 / TODO
+
+### 必须完成 / Required:
+[ ] 用真实生成的音频替换 10 个 CFG 占位符文件
+    - 使用相同的测试文本和 prompt
+    - 确保音频质量一致
+
+### 可选 / Optional:
+[ ] 测试所有音频播放器功能
+[ ] 在多个浏览器中验证布局
+[ ] 检查移动端响应式效果
+
+## 参考 / References
+
+相关论文章节:
+- Section C.2: CFG Strength Ablation (Page 15, Lines 792-824)
+- Table 5: CFG strength ablation results
+- Equation 1: CFG interpolation formula (Page 2, Line 101)
+
+## 联系 / Contact
+
+如需进一步修改或有问题，请参考:
+- AUDIO_FILES_UPDATED.md - 音频文件完整指南
+- README.md - 项目总体说明
+
+=================================================================
+修改完成 / Modifications Complete ✓
+=================================================================
