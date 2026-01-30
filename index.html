@@ -15,7 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: white;
             min-height: 100vh;
             padding: 20px;
         }
@@ -393,7 +393,7 @@
                 </div>
 
                 <!-- Comparison with Other Models -->
-                <div class="demo-section">
+                <!-- <div class="demo-section">
                     <h3>2. Comparison with Other Fast TTS Models</h3>
                     <p style="margin-bottom: 20px;">StepFlow compared with state-of-the-art fast TTS models on challenging samples.</p>
                     <table>
@@ -432,7 +432,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> -->
 
                 <!-- CFG Ablation Study -->
                 <div class="demo-section">
@@ -494,42 +494,6 @@
                     </table>
                     <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
                         <strong>Note:</strong> The inverted CFG curve (optimal at w=0.05 vs teacher's w=0.7) occurs because distillation internalizes the teacher's guidance effect. Using stronger inference-time CFG conflicts with this internalized guidance, causing quality degradation.
-                    </div>
-                </div>
-
-                <!-- Emotion and Prosody -->
-                <div class="demo-section">
-                    <h3>4. Emotion & Prosody Control</h3>
-                    <p style="margin-bottom: 20px;">StepFlow maintains expressive control even in single-step synthesis.</p>
-                    <div class="comparison-grid">
-                        <div class="comparison-card">
-                            <h4>😊 Happy / Excited</h4>
-                            <div class="audio-label">Teacher (10-step):</div>
-                            <audio controls><source src="audio/teacher_happy.wav" type="audio/wav"></audio>
-                            <div class="audio-label">StepFlow (1-step):</div>
-                            <audio controls><source src="audio/stepflow_happy.wav" type="audio/wav"></audio>
-                        </div>
-                        <div class="comparison-card">
-                            <h4>😢 Sad / Calm</h4>
-                            <div class="audio-label">Teacher (10-step):</div>
-                            <audio controls><source src="audio/teacher_sad.wav" type="audio/wav"></audio>
-                            <div class="audio-label">StepFlow (1-step):</div>
-                            <audio controls><source src="audio/stepflow_sad.wav" type="audio/wav"></audio>
-                        </div>
-                        <div class="comparison-card">
-                            <h4>😠 Angry / Intense</h4>
-                            <div class="audio-label">Teacher (10-step):</div>
-                            <audio controls><source src="audio/teacher_angry.wav" type="audio/wav"></audio>
-                            <div class="audio-label">StepFlow (1-step):</div>
-                            <audio controls><source src="audio/stepflow_angry.wav" type="audio/wav"></audio>
-                        </div>
-                        <div class="comparison-card">
-                            <h4>🎤 News / Professional</h4>
-                            <div class="audio-label">Teacher (10-step):</div>
-                            <audio controls><source src="audio/teacher_news.wav" type="audio/wav"></audio>
-                            <div class="audio-label">StepFlow (1-step):</div>
-                            <audio controls><source src="audio/stepflow_news.wav" type="audio/wav"></audio>
-                        </div>
                     </div>
                 </div>
 
