@@ -319,6 +319,16 @@
             }
         }
     </style>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$','$$']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
 </head>
 <body>
     <div class="container">
@@ -332,20 +342,19 @@
             <section>
                 <h2>Abstract</h2>
                 <div class="abstract">
-                    Flow-matching models have enabled high-quality text-to-speech synthesis, but their iterative sampling process incurs substantial computational cost. We introduce <span class="highlight">StepFlow</span>, a modular distillation framework for one-step synthesis. StepFlow addresses <span class="highlight">process variance</span> caused by endpoint error accumulation and <span class="highlight">structural parameter inefficiency</span> when reusing continuous-time architectures. By combining <span class="highlight">Dual Supervision</span> with <span class="highlight">Step-Aware Architecture</span>, StepFlow achieves near-teacher quality in a single inference step while reducing model parameters by 24%.
-                </div>
+Flow-matching models have enabled high-quality text-to-speech synthesis, but their iterative sampling process during inference incurs substantial computational cost. Although distillation is widely used to reduce the number of inference steps, existing methods often suffer from process variance due to endpoint error accumulation. Moreover, directly reusing continuous-time architectures for discrete, fixed-step generation introduces structural parameter inefficiencies.
+To address these challenges, we introduce DSFlow, a modular distillation framework for few-step and one-step synthesis. DSFlow reformulates generation as a discrete prediction task and explicitly adapts the student model to the target inference regime. It improves training stability through a dual supervision strategy that combines endpoint matching with deterministic mean-velocity alignment, enforcing consistent generation trajectories across inference steps. In addition, DSFlow improves parameter efficiency by replacing continuous-time timestep conditioning with lightweight step-aware tokens, aligning model capacity with the significantly reduced timestep space of the discrete task.
+Extensive experiments across diverse flow-based text-to-speech architectures demonstrate that DSFlow consistently outperforms standard distillation approaches, achieving strong few-step and one-step synthesis quality while reducing model parameters and inference cost.                </div>
             </section>
 
             <!-- Framework -->
             <section>
                 <h2>Framework Architecture</h2>
                 <div class="framework-container">
-                    <iframe src="resorces/Framework_final.pdf"></iframe>
-                    <a href="resorces/Framework_final.pdf" class="pdf-link" target="_blank">📄 View Full Framework PDF</a>
+                    <img src="assets/images/Framework_final.tif" alt="StepFlow Framework Architecture">
                     <div class="caption">
                         <strong>Figure 1. Overview of the StepFlow framework.</strong>
-                        The framework transitions from a heavy MLP-based modulation network (38M parameters) to a <strong>Step-Aware Architecture</strong> with Step-Aware Tokens (1.5K parameters). Our <strong>Dual Supervision</strong> strategy synergizes endpoint matching with deterministic mean velocity alignment, guiding the student along the teacher's mean trajectory and reducing training variance by 60%.
-                    </div>
+Overview of the DSFlow framework. The left and center panels show the transition from a DiT block with adaLN-Zero conditioning to the proposed step-aware architecture, where the heavy time-modulation network is replaced by lightweight step-aware tokens. The right panel illustrates dual supervision, which combines endpoint matching \( \mathcal{L}_{\mathrm{endpoint}} \) with deterministic mean velocity alignment \( \mathcal{L}_{\mathrm{velocity}} \) to guide the student along the teacher’s mean trajectory (green vectors), improving process consistency over endpoint-only distillation without additional Jacobian computation.                    </div>
                 </div>
             </section>
 
@@ -392,51 +401,10 @@
                     </table>
                 </div>
 
-                <!-- Comparison with Other Models -->
-                <!-- <div class="demo-section">
-                    <h3>2. Comparison with Other Fast TTS Models</h3>
-                    <p style="margin-bottom: 20px;">StepFlow compared with state-of-the-art fast TTS models on challenging samples.</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Model</th>
-                                <th>Type</th>
-                                <th>Long Sentence (English)</th>
-                                <th>Complex Phonetics (Mandarin)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="stepflow-row">
-                                <td><span class="model-name">StepFlow</span></td>
-                                <td>Flow-based (1-step)</td>
-                                <td><audio controls><source src="audio/stepflow_long_en.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/stepflow_complex_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">FastSpeech 2</span></td>
-                                <td>Non-autoregressive</td>
-                                <td><audio controls><source src="audio/fastspeech2_long_en.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/fastspeech2_complex_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">VITS</span></td>
-                                <td>VAE-based (1-step)</td>
-                                <td><audio controls><source src="audio/vits_long_en.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/vits_complex_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">StyleTTS 2</span></td>
-                                <td>Diffusion-based (1-step)</td>
-                                <td><audio controls><source src="audio/styletts2_long_en.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/styletts2_complex_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
 
                 <!-- CFG Ablation Study -->
                 <div class="demo-section">
-                    <h3>3. CFG Strength Ablation</h3>
+                    <h3>2. CFG Strength Ablation</h3>
                     <p style="margin-bottom: 20px;">Effect of classifier-free guidance (CFG) strength during inference. The student model achieves optimal performance at w=0.05, much lower than the teacher's w=0.7, because the student learns from teacher@w=0.7 targets during distillation and effectively internalizes the guidance effect.</p>
                     <table>
                         <thead>
@@ -499,7 +467,7 @@
 
                 <!-- Ablation Study -->
                 <div class="demo-section">
-                    <h3>5. Ablation Study: Component Analysis</h3>
+                    <h3>3. Ablation Study: Component Analysis</h3>
                     <p style="margin-bottom: 20px;">Hear the contribution of each component in StepFlow.</p>
                     <table>
                         <thead>
