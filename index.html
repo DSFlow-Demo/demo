@@ -195,6 +195,11 @@
             height: 40px;
         }
 
+        .audio-column {
+            min-width: 270px;
+            width: 270px;
+        }
+
         .text-column {
             max-width: 300px;
             width: 300px;
@@ -372,8 +377,8 @@ Overview of the DSFlow framework. The left and center panels show the transition
                                 <th>Model</th>
                                 <th>Steps</th>
                                 <th class="text-column">Text</th>
-                                <th>Prompt Speech</th>
-                                <th>Sample</th>
+                                <th class="audio-column">Prompt Speech</th>
+                                <th class="audio-column">Sample</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -381,20 +386,20 @@ Overview of the DSFlow framework. The left and center panels show the transition
                                 <td><span class="model-name">Teacher (StepTTS)</span><span class="badge badge-slow">10 steps</span></td>
                                 <td style="text-align: center;">10</td>
                                 <td rowspan="3" class="text-column" style="vertical-align: middle;">They moved thereafter cautiously about the hut, groping before and about them to find something to show that Warrenton had fulfilled his mission.</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                                <td><audio controls><source src="audio/teacher_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/teacher_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">StepFlow (Ours)</span><span class="badge badge-best">1 step</span><span class="badge badge-fast">10× faster</span></td>
                                 <td style="text-align: center;"><strong>1</strong></td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                                <td><audio controls><source src="audio/stepflow_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/stepflow_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">Naive Endpoint</span><span class="badge badge-fast">1 step</span></td>
                                 <td style="text-align: center;">1</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                                <td><audio controls><source src="audio/baseline_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/baseline_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                         </tbody>
                     </table>
@@ -411,8 +416,8 @@ Overview of the DSFlow framework. The left and center panels show the transition
                                 <th>CFG Strength (w)</th>
                                 <th>Description</th>
                                 <th class="text-column">Text</th>
-                                <th>Prompt Speech</th>
-                                <th>Sample</th>
+                                <th class="audio-column">Prompt Speech</th>
+                                <th class="audio-column">Sample</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -420,32 +425,32 @@ Overview of the DSFlow framework. The left and center panels show the transition
                                 <td><span class="model-name">w = 0.00</span></td>
                                 <td>No guidance</td>
                                 <td rowspan="5" class="text-column" style="vertical-align: middle;">They moved thereafter cautiously about the hut, groping before and about them to find something to show that Warrenton had fulfilled his mission.</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.00_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.00_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
                                 <td>Default (weak guidance)</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.05_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.05_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">w = 0.10</span></td>
                                 <td>Moderate guidance</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">w = 0.20</span></td>
                                 <td>Strong guidance</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">w = 0.50</span></td>
                                 <td>Very strong guidance</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
                             </tr>
                         </tbody>
                     </table>
@@ -464,8 +469,8 @@ Overview of the DSFlow framework. The left and center panels show the transition
                                 <th>Configuration</th>
                                 <th>Components</th>
                                 <th class="text-column">Text</th>
-                                <th>Prompt Speech</th>
-                                <th>Sample</th>
+                                <th class="audio-column">Prompt Speech</th>
+                                <th class="audio-column">Sample</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -473,26 +478,26 @@ Overview of the DSFlow framework. The left and center panels show the transition
                                 <td><span class="model-name">Baseline</span></td>
                                 <td>Endpoint only</td>
                                 <td rowspan="4" class="text-column" style="vertical-align: middle;">They moved thereafter cautiously about the hut, groping before and about them to find something to show that Warrenton had fulfilled his mission.</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">+ Dual Supervision</span></td>
                                 <td>Endpoint + Velocity</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">+ Step-Aware Arch</span></td>
                                 <td>Step-aware tokens</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">StepFlow (Full)</span></td>
                                 <td>All components</td>
-                                <td><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td><audio controls><source src="audio/cfg_w0.05_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio/cfg_w0.05_en.wav" type="audio/wav"></audio></td>
                             </tr>
                         </tbody>
                     </table>
