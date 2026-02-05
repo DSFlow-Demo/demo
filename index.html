@@ -355,8 +355,8 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                 <div class="framework-container">
                     <img src="assets/images/Framework_final.jpg" alt="StepFlow Framework Architecture">
                     <div class="caption">
-                        <strong>Figure 1. Overview of the StepFlow framework.</strong>
-Overview of the DSFlow framework. The left and center panels show the transition from a DiT block with adaLN-Zero conditioning to the proposed step-aware architecture, where the heavy time-modulation network is replaced by lightweight step-aware tokens. The right panel illustrates dual supervision, which combines endpoint matching with deterministic mean velocity alignment to guide the student along the teacher’s mean trajectory (green vectors), improving process consistency over endpoint-only distillation without additional Jacobian computation.                    </div>
+                        <strong>Figure 1. Overview of the DSFlow framework.</strong>
+ The left and center panels show the transition from a DiT block with adaLN-Zero conditioning to the proposed step-aware architecture, where the heavy time-modulation network is replaced by lightweight step-aware tokens. The right panel illustrates dual supervision, which combines endpoint matching with deterministic mean velocity alignment to guide the student along the teacher’s mean trajectory (green vectors), improving process consistency over endpoint-only distillation without additional Jacobian computation.                    </div>
                 </div>
             </section>
 
@@ -369,7 +369,7 @@ Overview of the DSFlow framework. The left and center panels show the transition
 
                 <!-- Main Comparison -->
                 <div class="demo-section">
-                    <h3>1. Quality Comparison: 10-Step Teacher vs 1-Step StepFlow</h3>
+                    <h3>1. Quality Comparison: 10-Step Teacher vs 1-Step DSFlow</h3>
                     <p style="margin-bottom: 20px;">Compare our 1-step synthesis against the 10-step teacher model and naive endpoint distillation.</p>
                     <table>
                         <thead>
@@ -462,7 +462,7 @@ Overview of the DSFlow framework. The left and center panels show the transition
                 <!-- Ablation Study -->
                 <div class="demo-section">
                     <h3>3. Ablation Study: Component Analysis</h3>
-                    <p style="margin-bottom: 20px;">Hear the contribution of each component in StepFlow.</p>
+                    <p style="margin-bottom: 20px;">Hear the contribution of each component in DSFlow.</p>
                     <table>
                         <thead>
                             <tr>
