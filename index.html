@@ -416,7 +416,7 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                 <!-- Main Comparison -->
                 <div class="demo-section">
                     <h3>1. Quality Comparison: 10-Step Teacher vs 1-Step DSFlow</h3>
-                    <p style="margin-bottom: 20px;">Multiple English and Chinese prompt speeches arranged in the paper-style layout. The prompt column uses the real audio in <code>dsflow_prompt/</code>, and each generated result is loaded from the corresponding file under <code>audio_icml_english_librispeech_b10/</code>.</p>
+                    <p style="margin-bottom: 20px;">Representative English and Chinese prompt utterances are shown below. Each row pairs a prompt recording with the corresponding teacher, naive endpoint, and DSFlow outputs.</p>
                     <table>
                         <thead>
                             <tr>
@@ -559,12 +559,12 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                 <!-- CFG Ablation Study -->
                 <div class="demo-section">
                     <h3>2. CFG Strength Ablation</h3>
-                    <p style="margin-bottom: 20px;">Prompt-matched CFG sweeps under the current 10-step baseline generation setting. We show two English and two Chinese prompt speeches, each evaluated with the same five inference-time CFG values.</p>
+                    <p style="margin-bottom: 20px;">Prompt-matched CFG sweeps under the current DSFlow setting. We show two English and two Chinese prompt utterances, each evaluated with the same five inference-time CFG values.</p>
                     <table>
                         <thead>
                             <tr>
                                 <th>Language</th>
-                                <th class="quality-prompt-column">Prompt Speech</th>
+                                <th class="quality-prompt-column">Prompt Audio</th>
                                 <th>CFG Strength (w)</th>
                                 <th>Description</th>
                                 <th class="audio-column">Sample</th>
@@ -705,12 +705,12 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                 <!-- Ablation Study -->
                 <div class="demo-section">
                     <h3>3. Ablation Study: Component Analysis</h3>
-                    <p style="margin-bottom: 20px;">Representative bilingual component-ablation board with two English and two Chinese prompt speeches. Each prompt is paired with the same four checkpoints so the relative quality progression is easier to compare.</p>
+                    <p style="margin-bottom: 20px;">A representative bilingual component-ablation comparison with two English and two Chinese prompt utterances. </p>
                     <table>
                         <thead>
                             <tr>
                                 <th>Language</th>
-                                <th class="quality-prompt-column">Prompt Speech</th>
+                                <th class="quality-prompt-column">Prompt Audio</th>
                                 <th>Configuration</th>
                                 <th>Components</th>
                                 <th class="audio-column">Sample</th>
