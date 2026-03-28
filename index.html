@@ -207,6 +207,58 @@
             font-size: 0.9em;
         }
 
+        .quality-prompt-column {
+            min-width: 360px;
+            width: 360px;
+        }
+
+        .result-column {
+            min-width: 220px;
+            width: 220px;
+        }
+
+        .language-cell {
+            text-align: center;
+            vertical-align: middle;
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #0f172a;
+            background: #eef6ff;
+        }
+
+        .prompt-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .prompt-file {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.8em;
+            color: #64748b;
+        }
+
+        .prompt-text-body {
+            font-size: 0.9em;
+            line-height: 1.55;
+            color: #334155;
+        }
+
+        .placeholder-card {
+            min-height: 84px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.92em;
+            padding: 12px;
+        }
+
         .badge {
             display: inline-block;
             padding: 4px 12px;
@@ -370,111 +422,164 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                 <!-- Main Comparison -->
                 <div class="demo-section">
                     <h3>1. Quality Comparison: 10-Step Teacher vs 1-Step DSFlow</h3>
-                    <p style="margin-bottom: 20px;">Compare our 1-step synthesis against the 10-step teacher model and naive endpoint distillation.</p>
+                    <p style="margin-bottom: 20px;">Multiple English and Chinese prompt speeches arranged in the paper-style layout. The prompt column uses the real audio in <code>dsflow_prompt/</code>, and each generated result is loaded from the corresponding file under <code>audio_icml_english_librispeech_b10/</code>.</p>
                     <table>
                         <thead>
                             <tr>
-                                <th>Model</th>
-                                <th>Steps</th>
-                                <th class="text-column">Text</th>
-                                <th class="audio-column">Prompt Speech</th>
-                                <th class="audio-column">Sample</th>
+                                <th>Language</th>
+                                <th class="quality-prompt-column">Prompt</th>
+                                <th class="result-column">Teacher (StepTTS)<br>10 steps</th>
+                                <th class="result-column">Naive Endpoint<br>1 step</th>
+                                <th class="result-column">DSFlow<br>1 step</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="model-name">Teacher (StepTTS)</span><span class="badge badge-slow">10 steps</span></td>
-                                <td style="text-align: center;">10</td>
-                                <td rowspan="3" class="text-column" style="vertical-align: middle;">They moved thereafter cautiously about the hut, groping before and about them to find something to show that Warrenton had fulfilled his mission.</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/teacher_main_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td rowspan="6" class="language-cell">EN</td>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">common_voice_en_589496.wav</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_589496.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">The men climbed the hill, and they were tired when they reached the top.</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_en/Teacher_output_EN_common_voice_en_589496_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_en/Endpoint_output_EN_common_voice_en_589496_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_en/DSFLOW14000_output_EN_common_voice_en_589496_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">Naive Endpoint</span><span class="badge badge-fast">1 step</span></td>
-                                <td style="text-align: center;">1</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline_main_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                            </tr>
-                            <tr class="stepflow-row">
-                                <td><span class="model-name">DSFlow (Ours)</span><span class="badge badge-best">1 step</span></td>
-                                <td style="text-align: center;"><strong>1</strong></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline8_main_en.wav" type="audio/wav">Your browser does not support audio.</audio></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="demo-section">
-                    <h3>1B. ICML English Supplement: Harder Stress Cases</h3>
-                    <p style="margin-bottom: 20px;">Additional English-only comparisons loaded from <code>audio_icml_english_librispeech_b8/</code> so the original demo assets remain untouched. The baseline uses the degraded teacher setting with a forced 1-step flow and CFG = 0.0.</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Case</th>
-                                <th>Model</th>
-                                <th>Steps</th>
-                                <th class="text-column">Text</th>
-                                <th class="audio-column">Prompt Speech</th>
-                                <th class="audio-column">Sample</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="3" style="vertical-align: middle;"><span class="model-name">Ornate Description</span></td>
-                                <td><span class="model-name">Teacher (StepTTS)</span><span class="badge badge-slow">10 steps</span></td>
-                                <td style="text-align: center;">10</td>
-                                <td rowspan="3" class="text-column" style="vertical-align: middle;">It was further decorated with strange and seemingly cabalistic figures and diagrams suitable to the quaint taste of the age which had been drawn in the stucco when newly laid on and had now grown hard and durable for the admiration of after times.</td>
-                                <td rowspan="3" class="audio-column" style="vertical-align: middle;"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/teacher_ornate_en.wav" type="audio/wav"></audio></td>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">common_voice_en_647713.wav</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_647713.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">A wise man shall hold his tongue till he sees his opportunity.</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_en/Teacher_output_EN_common_voice_en_647713_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_en/Endpoint_output_EN_common_voice_en_647713_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_en/DSFLOW14000_output_EN_common_voice_en_647713_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">Naive Endpoint</span><span class="badge badge-fast">1 step</span></td>
-                                <td style="text-align: center;">1</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline_ornate_en.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr class="stepflow-row">
-                                <td><span class="model-name">DSFlow (Ours)</span><span class="badge badge-best">1 step</span></td>
-                                <td style="text-align: center;"><strong>1</strong></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline8_ornate_en.wav" type="audio/wav"></audio></td>
-                            </tr>
-
-                            <tr>
-                                <td rowspan="3" style="vertical-align: middle;"><span class="model-name">Engineering Report</span></td>
-                                <td><span class="model-name">Teacher (StepTTS)</span><span class="badge badge-slow">10 steps</span></td>
-                                <td style="text-align: center;">10</td>
-                                <td rowspan="3" class="text-column" style="vertical-align: middle;">I think he was perhaps more appreciative than I was of the discipline of the Edison construction department and thought it would be well for us to wait until the morning of the fourth before we started up.</td>
-                                <td rowspan="3" class="audio-column" style="vertical-align: middle;"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/teacher_engineering_en.wav" type="audio/wav"></audio></td>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">common_voice_en_2586258.wav</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_2586258.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">Romeo and Juliet might be the most famous act of William Shakespeare.</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_en/Teacher_output_EN_common_voice_en_2586258_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_en/Endpoint_output_EN_common_voice_en_2586258_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_en/DSFLOW14000_output_EN_common_voice_en_2586258_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">Naive Endpoint</span><span class="badge badge-fast">1 step</span></td>
-                                <td style="text-align: center;">1</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline_engineering_en.wav" type="audio/wav"></audio></td>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">common_voice_en_10119832.wav</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_10119832.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">We asked over twenty different people, and they all said it was his.</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_en/Teacher_output_EN_common_voice_en_10119832_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_en/Endpoint_output_EN_common_voice_en_10119832_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_en/DSFLOW14000_output_EN_common_voice_en_10119832_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
-                            <tr class="stepflow-row">
-                                <td><span class="model-name">DSFlow (Ours)</span><span class="badge badge-best">1 step</span></td>
-                                <td style="text-align: center;"><strong>1</strong></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline8_engineering_en.wav" type="audio/wav"></audio></td>
+                            <tr>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">common_voice_en_581024.wav</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_581024.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">I'm afraid I might have soiled the couch a little with my shoes, Eddie Murphy.</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_en/Teacher_output_EN_common_voice_en_581024_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_en/Endpoint_output_EN_common_voice_en_581024_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_en/DSFLOW14000_output_EN_common_voice_en_581024_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                            </tr>
+                            <tr>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">common_voice_en_593372.wav</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_593372.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">On our way to San Francisco, we were listening to reggae music and smoking weed.</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_en/Teacher_output_EN_common_voice_en_593372_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_en/Endpoint_output_EN_common_voice_en_593372_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_en/DSFLOW14000_output_EN_common_voice_en_593372_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
 
                             <tr>
-                                <td rowspan="3" style="vertical-align: middle;"><span class="model-name">Art Criticism</span></td>
-                                <td><span class="model-name">Teacher (StepTTS)</span><span class="badge badge-slow">10 steps</span></td>
-                                <td style="text-align: center;">10</td>
-                                <td rowspan="3" class="text-column" style="vertical-align: middle;">By being studious of color they are studious of division and while the chiaroscurist devotes himself to the representation of degrees of force in one thing unseparated light the colorists have for their function the attainment of beauty by arrangement of the divisions of light.</td>
-                                <td rowspan="3" class="audio-column" style="vertical-align: middle;"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/teacher_artcritique_en.wav" type="audio/wav"></audio></td>
+                                <td rowspan="6" class="language-cell">ZH</td>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">Tingting_prompt.wav</div>
+                                        <audio controls><source src="dsflow_prompt/Tingting_prompt.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">那等我们到海洋馆之后，给妈妈买个礼物，好不好呀？</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_zh/Teacher_output_ZH_Tingting_prompt_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_zh/Endpoint_output_ZH_Tingting_prompt_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_zh/DSFLOW14000_output_ZH_Tingting_prompt_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">Naive Endpoint</span><span class="badge badge-fast">1 step</span></td>
-                                <td style="text-align: center;">1</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline_artcritique_en.wav" type="audio/wav"></audio></td>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">prompt_wav_yuqian.wav</div>
+                                        <audio controls><source src="dsflow_prompt/prompt_wav_yuqian.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">上次你说鞋子有点磨脚，我给你买了一双软软的鞋垫，这样垫上之后，应该会舒服很多。</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_zh/Teacher_output_ZH_prompt_wav_yuqian_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_zh/Endpoint_output_ZH_prompt_wav_yuqian_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_zh/DSFLOW14000_output_ZH_prompt_wav_yuqian_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
-                            <tr class="stepflow-row">
-                                <td><span class="model-name">DSFlow (Ours)</span><span class="badge badge-best">1 step</span></td>
-                                <td style="text-align: center;"><strong>1</strong></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline8_artcritique_en.wav" type="audio/wav"></audio></td>
+                            <tr>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">qizhiwenwan_6s.wav</div>
+                                        <audio controls><source src="dsflow_prompt/qizhiwenwan_6s.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">叫做秋风起蟹脚痒，啊，什么意思呢？就是说这秋风一起啊，螃蟹就该上市了。</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_zh/Teacher_output_ZH_qizhiwenwan_6s_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_zh/Endpoint_output_ZH_qizhiwenwan_6s_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_zh/DSFLOW14000_output_ZH_qizhiwenwan_6s_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                            </tr>
+                            <tr>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">step_f15_prompt.wav</div>
+                                        <audio controls><source src="dsflow_prompt/step_f15_prompt.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">请问你是要调整以下内容吗？图片显示时长，比如每张显示两秒。</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_zh/Teacher_output_ZH_step_f15_prompt_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_zh/Endpoint_output_ZH_step_f15_prompt_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_zh/DSFLOW14000_output_ZH_step_f15_prompt_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                            </tr>
+                            <tr>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">00004749-00000084.wav</div>
+                                        <audio controls><source src="dsflow_prompt/00004749-00000084.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">炼丹的火万一熄灭，那就前功尽弃了。</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_zh/Teacher_output_ZH_00004749-00000084_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_zh/Endpoint_output_ZH_00004749-00000084_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_zh/DSFLOW14000_output_ZH_00004749-00000084_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                            </tr>
+                            <tr>
+                                <td class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <div class="prompt-file">00004750-00000102.wav</div>
+                                        <audio controls><source src="dsflow_prompt/00004750-00000102.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">演戏之外，陈松勇也研究台湾话。</div>
+                                    </div>
+                                </td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/teacher_zh/Teacher_output_ZH_00004750-00000102_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/endpoint_zh/Endpoint_output_ZH_00004750-00000102_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                                <td class="result-column"><audio controls><source src="audio_icml_english_librispeech_b10/ds_flow_zh/DSFLOW14000_output_ZH_00004750-00000102_dsflow.wav" type="audio/wav">Your browser does not support audio.</audio></td>
                             </tr>
                         </tbody>
                     </table>
@@ -490,7 +595,6 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                             <tr>
                                 <th>CFG Strength (w)</th>
                                 <th>Description</th>
-                                <th class="text-column">Text</th>
                                 <th class="audio-column">Prompt Speech</th>
                                 <th class="audio-column">Sample</th>
                             </tr>
@@ -499,33 +603,32 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                             <tr>
                                 <td><span class="model-name">w = 0.00</span></td>
                                 <td>No guidance</td>
-                                <td rowspan="5" class="text-column" style="vertical-align: middle;">They moved thereafter cautiously about the hut, groping before and about them to find something to show that Warrenton had fulfilled his mission.</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.00_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.00_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
                                 <td>Default (weak guidance)</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.05_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.05_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">w = 0.10</span></td>
                                 <td>Moderate guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">w = 0.20</span></td>
                                 <td>Strong guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">w = 0.50</span></td>
                                 <td>Very strong guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
                             </tr>
                         </tbody>
                     </table>
@@ -543,7 +646,6 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                             <tr>
                                 <th>Configuration</th>
                                 <th>Components</th>
-                                <th class="text-column">Text</th>
                                 <th class="audio-column">Prompt Speech</th>
                                 <th class="audio-column">Sample</th>
                             </tr>
@@ -552,27 +654,26 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                             <tr>
                                 <td><span class="model-name">Baseline</span></td>
                                 <td>Endpoint only</td>
-                                <td rowspan="4" class="text-column" style="vertical-align: middle;">They moved thereafter cautiously about the hut, groping before and about them to find something to show that Warrenton had fulfilled his mission.</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.50_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">+ Dual Supervision</span></td>
                                 <td>Endpoint + Velocity</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.20_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
                                 <td><span class="model-name">+ Step-Aware Arch</span></td>
                                 <td>Step-aware tokens</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/cfg_w0.10_en.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">DSFlow (Full)</span></td>
                                 <td>All components</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b8/baseline8_main_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/librispeech_prompt_short.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="audio_icml_english_librispeech_b10/baseline10_main_en.wav" type="audio/wav"></audio></td>
                             </tr>
                         </tbody>
                     </table>
