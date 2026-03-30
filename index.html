@@ -559,7 +559,7 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                 <!-- CFG Ablation Study -->
                 <div class="demo-section">
                     <h3>2. CFG Strength Ablation</h3>
-                    <p style="margin-bottom: 20px;">Prompt-matched CFG sweeps under the current DSFlow setting. We show two English and two Chinese prompt utterances, each evaluated with the same five inference-time CFG values.</p>
+                    <p style="margin-bottom: 20px;">Prompt-matched CFG sweeps under the current DSFlow setting. We show two English and two Chinese prompt utterances, each evaluated with the same three inference-time CFG values from the latest run.</p>
                     <table>
                         <thead>
                             <tr>
@@ -572,110 +572,90 @@ Extensive experiments across diverse flow-based text-to-speech architectures dem
                         </thead>
                         <tbody>
                             <tr>
-                                <td rowspan="8" class="language-cell">EN</td>
-                                <td rowspan="4" class="quality-prompt-column">
+                                <td rowspan="6" class="language-cell">EN</td>
+                                <td rowspan="3" class="quality-prompt-column">
                                     <div class="prompt-card">
-                                        <audio controls><source src="dsflow_prompt/common_voice_en_589496.wav" type="audio/wav">Your browser does not support audio.</audio>
-                                        <div class="prompt-text-body">The men climbed the hill, and they were tired when they reached the top.</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_2586258.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">Romeo and Juliet might be the most famous act of William Shakespeare.</div>
                                     </div>
                                 </td>
-                                <td><span class="model-name">w = 0.00</span></td>
+                                <td><span class="model-name">w = 0</span></td>
                                 <td>No guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.00_cv589496_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG0000_output_EN_common_voice_en_2586258_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
                                 <td>Default (weak guidance)</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.05_cv589496_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG005_output_EN_common_voice_en_2586258_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">w = 0.10</span></td>
-                                <td>Moderate guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.10_cv589496_en.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">w = 0.20</span></td>
+                                <td><span class="model-name">w = 0.5</span></td>
                                 <td>Strong guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.20_cv589496_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG05_output_EN_common_voice_en_2586258_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
-                                <td rowspan="4" class="quality-prompt-column">
+                                <td rowspan="3" class="quality-prompt-column">
                                     <div class="prompt-card">
-                                        <audio controls><source src="dsflow_prompt/common_voice_en_647713.wav" type="audio/wav">Your browser does not support audio.</audio>
-                                        <div class="prompt-text-body">A wise man shall hold his tongue till he sees his opportunity.</div>
+                                        <audio controls><source src="dsflow_prompt/common_voice_en_581024.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">I'm afraid I might have soiled the couch a little with my shoes Eddie Murphy.</div>
                                     </div>
                                 </td>
-                                <td><span class="model-name">w = 0.00</span></td>
+                                <td><span class="model-name">w = 0</span></td>
                                 <td>No guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.00_cv647713_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG0000_output_EN_common_voice_en_581024_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
                                 <td>Default (weak guidance)</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.05_cv647713_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG005_output_EN_common_voice_en_581024_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">w = 0.10</span></td>
-                                <td>Moderate guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.10_cv647713_en.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">w = 0.20</span></td>
+                                <td><span class="model-name">w = 0.5</span></td>
                                 <td>Strong guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.20_cv647713_en.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG05_output_EN_common_voice_en_581024_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
-                                <td rowspan="8" class="language-cell">ZH</td>
-                                <td rowspan="4" class="quality-prompt-column">
+                                <td rowspan="6" class="language-cell">ZH</td>
+                                <td rowspan="3" class="quality-prompt-column">
+                                    <div class="prompt-card">
+                                        <audio controls><source src="dsflow_prompt/00004749-00000084.wav" type="audio/wav">Your browser does not support audio.</audio>
+                                        <div class="prompt-text-body">炼丹的火万一熄灭，那就前功尽弃了。</div>
+                                    </div>
+                                </td>
+                                <td><span class="model-name">w = 0</span></td>
+                                <td>No guidance</td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG0000_output_ZH_00004749-00000084_dsflow.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr class="stepflow-row">
+                                <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
+                                <td>Default (weak guidance)</td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG005_output_ZH_00004749-00000084_dsflow.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td><span class="model-name">w = 0.5</span></td>
+                                <td>Strong guidance</td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG05_output_ZH_00004749-00000084_dsflow.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="quality-prompt-column">
                                     <div class="prompt-card">
                                         <audio controls><source src="dsflow_prompt/Tingting_prompt.wav" type="audio/wav">Your browser does not support audio.</audio>
                                         <div class="prompt-text-body">那等我们到海洋馆之后，给妈妈买个礼物，好不好呀？</div>
                                     </div>
                                 </td>
-                                <td><span class="model-name">w = 0.00</span></td>
+                                <td><span class="model-name">w = 0</span></td>
                                 <td>No guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.00_tingting_zh.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG0000_output_ZH_Tingting_prompt_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr class="stepflow-row">
                                 <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
                                 <td>Default (weak guidance)</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.05_tingting_zh.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG005_output_ZH_Tingting_prompt_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                             <tr>
-                                <td><span class="model-name">w = 0.10</span></td>
-                                <td>Moderate guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.10_tingting_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">w = 0.20</span></td>
+                                <td><span class="model-name">w = 0.5</span></td>
                                 <td>Strong guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.20_tingting_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="4" class="quality-prompt-column">
-                                    <div class="prompt-card">
-                                        <audio controls><source src="dsflow_prompt/step_f15_prompt.wav" type="audio/wav">Your browser does not support audio.</audio>
-                                        <div class="prompt-text-body">上次你说鞋子有点磨脚，我给你买了一双软软的鞋垫，这样你垫上之后应该会舒服很多。</div>
-                                    </div>
-                                </td>
-                                <td><span class="model-name">w = 0.00</span></td>
-                                <td>No guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.00_stepf15_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr class="stepflow-row">
-                                <td><span class="model-name">w = 0.05</span><span class="badge badge-best">Optimal</span></td>
-                                <td>Default (weak guidance)</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.05_stepf15_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">w = 0.10</span></td>
-                                <td>Moderate guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.10_stepf15_zh.wav" type="audio/wav"></audio></td>
-                            </tr>
-                            <tr>
-                                <td><span class="model-name">w = 0.20</span></td>
-                                <td>Strong guidance</td>
-                                <td class="audio-column"><audio controls><source src="audio_icml_multilingual_ablation/cfg_w0.20_stepf15_zh.wav" type="audio/wav"></audio></td>
+                                <td class="audio-column"><audio controls><source src="cfg_demo/CFG05_output_ZH_Tingting_prompt_dsflow.wav" type="audio/wav"></audio></td>
                             </tr>
                         </tbody>
                     </table>
